@@ -1,1 +1,42 @@
+# Train Logistic Regression
+python src/train_logreg.py \
+  --csv data/health.csv \
+  --target disease \
+  --output_dir . \
+  --test_size 0.2 \
+  --random_state 42
 
+# Train Random Forest
+python src/train_random_forest.py \
+  --csv data/health.csv \
+  --target disease \
+  --output_dir . \
+  --test_size 0.2 \
+  --random_state 42
+
+# Evaluate a saved model (works for either model)
+python src/evaluate.py \
+  --csv data/health.csv \
+  --target disease \
+  --model_path models/logreg_model.joblib \
+  --preprocessor_path models/preprocessor.joblib \
+  --output_dir .
+
+# Predict on new CSV (no labels needed)
+python src/predict.py \
+  --csv data/new_patients.csv \
+  --model_path models/logreg_model.joblib \
+  --preprocessor_path models/preprocessor.joblib \
+  --output_path predictions.csv
+
+
+---
+
+## `requirements.txt`
+
+```txt
+pandas>=2.0.0
+numpy>=1.24.0
+scikit-learn>=1.3.0
+matplotlib>=3.8.0
+joblib>=1.3.0
